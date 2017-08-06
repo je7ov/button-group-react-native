@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import Button from './button';
 
 class ButtonGroup extends React.Component {
@@ -8,7 +8,7 @@ class ButtonGroup extends React.Component {
     this.handleOnPress = this.handleOnPress.bind(this);
     this.state = {
       active: -1
-    }
+    };
   }
 
   handleOnPress(index) {
@@ -23,15 +23,14 @@ class ButtonGroup extends React.Component {
           onPress: () => {
             this.handleOnPress(i);
             if (this.props.onPress) {
-              this.props.onPress(i)
+              this.props.onPress(i);
             }
           },
           active: Number(this.state.active) === i
         });
-      } else {
-        return child;
       }
-    })
+      return child;
+    });
   }
 
   render() {
@@ -42,9 +41,5 @@ class ButtonGroup extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-
-});
 
 export default ButtonGroup;

@@ -15,12 +15,15 @@ class Header extends React.Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: 70 + Constants.statusBarHeight,
+    marginBottom: 16,
+    paddingTop: Constants.statusBarHeight,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#7070FF',
-    height: 70 + Constants.statusBarHeight,
-    paddingTop: Constants.statusBarHeight,
-    marginBottom: 16
+    elevation: 4,
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 4}
   },
 
   title: {
