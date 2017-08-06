@@ -17,12 +17,20 @@ class Button extends React.Component {
 const styles = StyleSheet.create({
   container: {
     width: 'auto',
+    minWidth: 70,
     height: 40,
-    padding: 12,
+    paddingTop: 14,
+    paddingBottom: 14,
+    paddingLeft: 24,
+    paddingRight: 24,
     margin: 8,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 32,
+  },
+
+  text: {
+    fontSize: 18
   }
 });
 

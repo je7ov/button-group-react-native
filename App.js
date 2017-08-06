@@ -10,51 +10,99 @@ export default class App extends React.Component {
     this.handleOnPress = this.handleOnPress.bind(this);
     this.state = {
       answers: {
-        q1: -1,
-        q2: -1,
-        q3: -1
+        q1: 'None',
+        q2: 'None',
+        q3: 'None',
+        q4: 'None'
       }
     }
+
+    this.genders = [
+      {key: 1, gender: 'Boy'},
+      {key: 2, gender: 'Girl'}
+    ];
+    this.colors = [
+      {key: 1, color: 'Red'},
+      {key: 2, color: 'Blue'},
+      {key: 3, color: 'Green'}
+    ];
+    this.subjects = [
+      {key: 1, subject: 'Gym'},
+      {key: 2, subject: 'Math'},
+      {key: 3, subject: 'Writing'}
+    ];
+    this.qualities = [
+      {key: 1, quality: 'Confident'},
+      {key: 2, quality: 'Patient'},
+      {key: 3, quality: 'A Leader'}
+    ];
   }
 
   handleOnPress(name, index) {
-    const ans = this.state.answers;
-    ans[name] = index;
+    const answers = this.state.answers;
+    let arr, prop;
+    switch (name) {
+      case 'q1':
+        arr = 'genders';
+        prop = 'gender';
+        break;
+      case 'q2':
+        arr = 'colors';
+        prop = 'color';
+        break;
+      case 'q3':
+        arr = 'subjects';
+        prop = 'subject';
+        break;
+      case 'q4':
+        arr = 'qualities';
+        prop = 'quality';
+        break;
+      default:
+        arr = 'genders';
+        prop = 'gender';
+    }
+    answers[name] = this[arr][index][prop];
     this.setState({
-      answers: ans
+      answers
     })
   }
 
   render() {
-    const { q1, q2, q3 } = this.state.answers;
+    const { q1, q2, q3, q4 } = this.state.answers;
 
     return (
       <View style={styles.container}>
         <Header title="Button Groups"/>
 
-        <Text>{`Choices: ${q1+1}, ${q2+1}, ${q3+1}`}</Text>
+        <Text style={styles.topText}>{`Choices: ${q1}, ${q2}, ${q3}, ${q4}`}</Text>
 
         <Text style={styles.question}>Question 1:</Text>
         <ButtonGroup style={styles.group} name="q1" onPress={ (i) => this.handleOnPress('q1', i) }>
-          <Button text="Option 1" />
-          <Button text="Option 2" />
-          <Button text="Option 3" />
-          <Button text="Option 4" />
+          {this.genders.map((gender) => {
+            return (<Button text={gender.gender} key={gender.key} />);
+          })}
         </ButtonGroup>
 
         <Text style={styles.question}>Question 2:</Text>
         <ButtonGroup style={styles.group} name="q2" onPress={ (i) => this.handleOnPress('q2', i) }>
-          <Button text="Option 1" />
-          <Button text="Option 2" />
-          <Button text="Option 3" />
+          {this.colors.map((color) => {
+            return (<Button text={color.color} key={color.key} />);
+          })}
         </ButtonGroup>
 
         <Text style={styles.question}>Question 3:</Text>
         <ButtonGroup style={styles.group} name="q3" onPress={ (i) => this.handleOnPress('q3', i) }>
-          <Button text="Option 1" />
-          <Button text="Option 2" />
-          <Button text="Option 3" />
-          <Button text="Option 4" />
+          {this.subjects.map((subject) => {
+            return (<Button text={subject.subject} key={subject.key} />);
+          })}
+        </ButtonGroup>
+
+        <Text style={styles.question}>Question 4:</Text>
+        <ButtonGroup style={styles.group} name="q4" onPress={ (i) => this.handleOnPress('q4', i) }>
+          {this.qualities.map((quality) => {
+            return (<Button text={quality.quality} key={quality.key} />);
+          })}
         </ButtonGroup>
       </View>
     );
@@ -77,5 +125,10 @@ const styles = StyleSheet.create({
   question: {
     fontSize: 24,
     marginBottom: 12
+  },
+
+  topText: {
+    fontSize: 18,
+    margin: 24
   }
 });
