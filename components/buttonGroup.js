@@ -20,7 +20,12 @@ class ButtonGroup extends React.Component {
       if (child.type === Button) {
         return React.cloneElement(child, {
           name: this.props.name,
-          onPress: () => { this.handleOnPress(i) },
+          onPress: () => {
+            this.handleOnPress(i);
+            if (this.props.onPress) {
+              this.props.onPress(i)
+            }
+          },
           active: Number(this.state.active) === i
         });
       } else {
